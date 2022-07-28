@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+         <link rel="icon" type="image/png" href="{{url_for('static', filename='images/icons/favicon_new.ico')}}">
+
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+   <title>Medical Condition Predictor and Drug Recommender (MCPDR)</title>
+
+	<style>
+        .highlight {background-color: #FFFF00}
+
+        div {
+  font-size: 20px;
+}
+    </style>
+    <script src="/scripts/snippet-javascript-console.min.js?v=1"></script>
+<!--===============================================================================================-->	
+	
+    <link rel="icon" type="image/png" href="{{url_for('static', filename='images/icons/favicon_new.ico')}}">
+
+   <style>
+        .form-actions {
+            margin: 0;
+            background-color: transparent;
+            text-align: center;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .navbar-custom {
+    background-color: #00008B;
+}
+/* change the brand and text color */
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: #ffffff;
+}
+/* change the link color */
+.navbar-custom .navbar-nav .nav-link {
+    color: #ffffff;
+}
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    
+    color: #ffff00;
+}
+
+.table {
+   margin: auto;
+   width: 50% !important; 
+}
+    </style>
+    <style> 
+#rcorners1 {
+  border-radius: 10px;
+  background : #7A82FE;
+  padding: 10px; 
+  display:inline-block;
+  height: 2;
+  color:white;
+0px;  
+}
+
+#rcorners2 {
+  
+  
+  padding: 10px; 
+  display:inline-block;
+  height: 2;
+  
+0px;  
+}
+
+p.round1 {
+  
+  border-radius: 8px;
+  
+  padding:3px;
+  
+  text-align:center;
+  color:black;
+  background:#0C95F7;
+}
+
+p.round2 {
+  
+  border-radius: 8px;
+  
+  padding:3px;
+  
+  text-align:center;
+  color:black;
+  background:#FC8F7D;
+}
+p.round3 {
+  
+  border-radius: 8px;
+ 
+  padding:3px;
+  
+  text-align:center;
+  color:black;
+  background:#2EEAFE;
+}
+
+
+#div_top_hypers {
+    background-color:white;
+    display:inline;      
+}
+#ul_top_hypers {
+   
+   min-width: 696px;
+	list-style: none;
+	padding-top: 20px;
+}
+
+#ul_top_hypers li{
+   
+    display: inline;
+}
+
+.table {
+	display: table;   /* Allow the centering to work */
+	margin: 0 auto;
+}
+
+ table, th
+            {
+                
+                padding: 5px;
+                font-family:Verdana;
+                font-size:20px;
+                text-align: left;
+                font-weight:normal;
+            }
+
+ul.horizontal-style {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: white;
+}
+
+li.horizontal-style {
+  float: center;
+}
+
+li.new-style {
+  float: right;
+}
+
+
+
+li.horizontal-style a{
+  display: block;
+  color: black;
+  
+  text-align: center;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+
+</style>
+    <script src="https://kit.fontawesome.com/a658a7b479.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-custom">
+        <a class="navbar-brand" href="#">MCPDR</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+               
+                <li class="nav-item">
+                    <a class="nav-link" href="/index">Home</a>
+                </li>
+
+               
+                
+            </ul>
+            <ul class="nav navbar-right" >
+                <li class="nav-item">
+                   <a class="nav-link" href="/logout">Log out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br>
+   
+
+
+    <br> 
+
+<br>
+
+<form class="container" method="POST" action="/predict" enctype = "multipart/form-data">
+
+    <div class="form-group">
+        <label for="exampleFormControlInput1" class="font-weight-bold">Enter Medical issue for Getting Drug Recommendation : </label>
+
+        <textarea rows="5" cols="5" required="true" name="rawtext" class="form-control">
+		</textarea> 
+        
+    </div>
+    
+    <br><br>
+
+   
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary btn-lg" type="submit" >Predict</button>
+    </div>
+    <br><br>
+    
+    
+
+</form>
+
+{% if show_predictions_modal %}
+
+<div class="card text-center" >
+        <div class="card-header">
+           Alert !!!
+        </div>
+        <div class="card-body">
+            
+            <p id="old" class="card-text">
+            
+             {{ err }}
+
+             <form action="/proceed" method="POST">
+    <button type="submit" name="view" value="Proceed"
+                            formmethod="post">Proceed</button>
+                            
+                </form>            
+            </p>
+
+        </div>
+      
+    </div>
+
+{% endif %}
+
+ {% block content %}
+    {% endblock %}
+<br><br>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js "
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n " crossorigin="anonymous ">
+        </script>
+    
+    
+</body>
+</html>
